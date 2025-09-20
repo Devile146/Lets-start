@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Intro Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+        }
+        .big-block {
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #29b6f6, #b3e5fc) 1;
+            padding: 30px;
+            margin: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .made-by {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border-radius: 5px;
+            font-size: 36px;
+            font-weight: bold;
+            border: 2px solid;
+            border-image: linear-gradient(90deg, #f00, #0f0, #00f) 1;
+            box-shadow: 0 0 10px #0ff;
+            background: linear-gradient(to right, #ffff00, #ffffff, #0000ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: text-shadow-rotate 5s linear infinite;
+        }
+        @keyframes text-shadow-rotate {
+            0% { text-shadow: 0 0 5px #ffff00; }
+            50% { text-shadow: 0 0 5px #0000ff; }
+            100% { text-shadow: 0 0 5px #ffff00; }
+        }
+        .led-text {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #0ff;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            text-shadow: 0 0 5px #0ff;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border-radius: 50px;
+            margin: 10px;
+            border: 2px solid;
+            border-image: linear-gradient(to right, #f0f, #0ff, #f0f) 1;
+            animation: border-rotate 5s linear infinite;
+            box-shadow: 0 0 10px #0ff;
+        }
+        @keyframes border-rotate {
+            0% { border-image-source: linear-gradient(to right, #f0f, #0ff, #f0f); }
+            50% { border-image-source: linear-gradient(to right, #0ff, #f0f, #0ff); }
+            100% { border-image-source: linear-gradient(to right, #f0f, #0ff, #f0f); }
+        }
+    </style>
+</head>
+<body>
+    <div class="big-block">
+        <p class="made-by">Made By TECHNICAL FAHAD</p>
+        <p class="led-text">Hi I'm Technical Fahad. This is My New And First Hosted Intro Page Web. Hope You Like My New Work</p>
+    </div>
+    
+    <div style="text-align: center;">
+        <span class="button">Tech King</span>
+        <span class="button">Contact: +923251138959</span>
+    </div>
+</body>
+</html>

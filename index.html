@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Fahad Web</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400&family=Black+Ops+One&display=swap" rel="stylesheet">
+<style>
+body {
+  background: #0d1117;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+/* WHATSAPP BAN TOOL BOX */
+.tool-box{
+  width: 550px;
+  max-width: 600%;
+  padding: 20px 0;
+  margin-bottom: 14px;
+  font-size:2.5em;
+  font-weight:bold;
+  color:#00ff7f; /* Bright parrot green */
+  border:3px solid #00ff7f;
+  border-radius:20px;
+  background: rgba(0,255,127,0.05);
+  text-align: center;
+  box-shadow:0 0 35px rgba(0,255,127,0.6), 0 0 60px rgba(0,255,127,0.3);
+}
+
+/* TOP NAME */
+.intro-box {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.intro-box .intro {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.5em; /* Stylish & slightly smaller */
+  color: #00ffff;
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px #00ffff, 0 0 40px #00b3b3;
+  font-weight: normal; 
+}
+
+/* CONTACT BUTTON (Below HOW TO USE) */
+.contact-btn{
+  margin: 25px 50;
+  width: 220px; 
+  max-width: 90%;
+  padding: 15px 0; 
+  font-size:1.5em; 
+  font-weight:bold;
+  color:#fff;
+  border:none;
+  border-radius:70px;
+  cursor:pointer;
+  background: linear-gradient(135deg, #ff8c00, #ff3c00); 
+  box-shadow: 0 0 20px #ff8c00, 0 0 40px #ff3c00;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.contact-btn:hover{
+  transform: scale(1.08);
+  box-shadow: 0 0 40px #ff8c00, 0 0 70px #ff3c00;
+}
+
+/* ABOUT */
+.about {
+  font-size: 1.5em;
+  margin-bottom: 50px;
+  text-align: center;
+  color: #b0b0b0;
+}
+
+/* SCRIPT BOXES */
+.script-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 90px;
+  width: 80%;
+}
+.script-box {
+  width: 370px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 35px;
+  cursor: pointer;
+  border: 3px solid rgba(255,255,255,0.2);
+  background: transparent;
+  text-align: center;
+  transition: transform 0.8s;
+}
+.script-box:nth-child(1){ box-shadow:0 0 25px #ff4b2b,0 0 50px #ff512f;}
+.script-box:nth-child(2){ box-shadow:0 0 25px #00c6ff,0 0 50px #0072ff;}
+.script-box:nth-child(3){ box-shadow:0 0 25px #8e2de2,0 0 50px #4a00e0;}
+.script-box:nth-child(4){ box-shadow:0 0 25px #feda75,0 0 50px #ff7e5f;}
+.script-box:nth-child(5){ box-shadow:0 0 25px #00ff88,0 0 50px #009966;}
+.script-box:nth-child(6){ box-shadow:0 0 25px #ee0979,0 0 50px #ff6a00;}
+.script-box:nth-child(7){ box-shadow:0 0 25px #8e2de2,0 0 50px #4a00e0;}
+.script-box:nth-child(8){ box-shadow:0 0 25px #feda75,0 0 50px #ff7e5f;}
+.script-box:nth-child(9){ box-shadow:0 0 25px #00c6ff,0 0 50px #0072ff;}
+.script-box:nth-child(10){ box-shadow:0 0 25px #00ff88,0 0 50px #009966;}
+.script-box:hover { transform: scale(1.09); }
+
+
+/* HOW TO USE BUTTON (TOP)*/
+.how-to-use {
+  margin: 20px 0;
+  width: 200px; /* smaller width like contact */
+  padding: 14px 0; /* small height */
+  background:linear-gradient(135deg,#ff4b2b,#ff416c);
+  border:none;
+  border-radius:10px;
+  font-size:1.3em; 
+  cursor:pointer;
+  color:#fff;
+  box-shadow:0 0 20px #ff416c;
+  transition: transform 0.3s, box-shadow 0.2s;
+}
+.how-to-use:hover {
+  transform: scale(1.00);
+  box-shadow:0 0 80px #ff416c;
+}
+
+/* JOIN WHATSAPP BUTTON (LAST, WIDE) */
+.whatsapp-btn {
+  margin-top:15px;
+  padding:14px 100px; /* NORMAL WIDTH */
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:#fff;
+  font-size:1.5em;
+  border-radius:25px;
+  text-decoration:none;
+  display:inline-block;
+  box-shadow:none;
+  transition: transform 0.3s;
+}
+.whatsapp-btn:hover {
+  transform: scale(1.05);
+}
+
+/* FOOTER */
+.footer-text {
+  margin-top:20px;
+  font-size:0.9em;
+  color:#FFD700;
+  text-align:center;
+}
+
+/* MEDIA */
+@media(max-width:400px){
+  .script-box{ width:90%; height:200px; font-size:1.2em;}
+  .intro-box .intro{ font-size:2.5em; }
+  .tool-box, .contact-btn, .whatsapp-btn, .how-to-use{ width:90%; padding:12px 0;}
+}
+</style>
+</head>
+<body>
+
+<!-- WHATSAPP BAN TOOL BOX (TOP) -->
+<div class="tool-box">WHATSAPP BAN TOOL</div>
+
+<!-- TOP NAME -->
+<div class="intro-box"><div class="intro">TECHNICAL FAHAD</div></div>
+
+
+<!-- CONTACT BUTTON (Below HOW TO USE) -->
+<a class="contact-btn" href="https://wa.me/923251138959" target="_blank">CONTACT</a>
+<style>
+.contact-btn{
+  display: flex;              /* 🔥 important */
+  align-items: center;        /* vertical center */
+  justify-content: center;    /* horizontal center */
+  padding: 12px 25px;
+  background: linear-gradient(45deg, #FF06FFFF, #FFFF00E6);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 25px;
+  font-weight: bold;
+  width: 120px;               /* optional */
+  height: 20px;               /* optional */
+}
+</style>
+
+<!-- ABOUT -->
+<div class="about">A Professional Developer & Script Creator</div>
+
+<!-- SCRIPT BOXES -->
+<div class="script-container">
+  <a class="script-box" href="https://www.mediafire.com/file/xq44xc72j2nedjq/BAN_SCRIPT_1.txt/file" target="_blank">SCRIPT 1</a>
+  <a class="script-box" href="https://www.mediafire.com/file/xq44xc72j2nedjq/BAN_SCRIPT_1.txt/file" target="_blank">SCRIPT 2</a>
+  <a class="script-box" href="https://www.mediafire.com/file/bslleekddasw9y7/3.txt/file" target="_blank">SCRIPT 3</a>
+  <a class="script-box" href="https://www.mediafire.com/file/s6ci708msc1s9wi/4.txt/file" target="_blank">SCRIPT 4</a>
+  <a class="script-box" href="https://www.mediafire.com/file/29xu0ee3bhcx91b/5.txt/file" target="_blank">SCRIPT 5</a>
+  <a class="script-box" href="https://www.mediafire.com/file/motac0bhhjg9iho/SCRIPT_6.txt/file" target="_blank">SCRIPT 6</a>
+  <a class="script-box" href="https://www.mediafire.com/file/xh1hzowxtl31xfg/BAN-7.txt/file" target="_blank">SCRIPT 7</a>
+  <a class="script-box" href="https://www.mediafire.com/file/oh6ls25mawo5c7i/BAN_SCRIPT_8.txt/file" target="_blank">SCRIPT 8</a>
+  <a class="script-box" href="https://www.mediafire.com/file/nc3lonrucn92d2m/BAN-9.txt/file" target="_blank">SCRIPT 9</a>
+  <a class="script-box" href="https://www.mediafire.com/file/28he8wd40omlm1n/WHATSAPP_BAN_DP.7z/file" target="_blank">BAN OP</a>
+</div>
+
+<!-- HOW TO USE BUTTON (TOP) -->
+<div style="height:25px;"></div>
+<button class="how-to-use"
+onclick="window.open('https://youtu.be/zLM48NNIRsg?si=eqZvH39AzUZLuSdI','_blank')">
+HOW TO USE
+</button>
+
+
+<!-- JOIN WHATSAPP BUTTON (LAST, WIDE) -->
+<a class="whatsapp-btn" href="https://whatsapp.com/channel/0029Vb7JH0r9RZAeMIjGqv0s" target="_blank">JOIN OUR WHATSAPP</a>
+
+<!-- FOOTER -->
+<div class="footer-text">2026 TECHNICAL_FAHAD</div>
+
+<!-- FLOATING SCRIPT BOXES -->
+<script>
+document.querySelectorAll('.script-box').forEach(box => {
+  let amplitude = Math.random()*20 + 10; 
+  let speed = Math.random()*0.03 + 0.01;
+  let pos = 0;
+  let dir = 1;
+  function float(){
+    pos += dir * speed * 100;
+    if(pos > amplitude) dir=-1;
+    if(pos < -amplitude) dir=1;
+    box.style.transform = `translateY(${pos}px)`;
+    requestAnimationFrame(float);
+  }
+  float();
+});
+</script>
+
+</body>
+</html>

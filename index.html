@@ -2,281 +2,436 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Technical Fahad Web</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400&family=Black+Ops+One&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HACKER TERMINAL • w0.bas</title>
   <style>
+    /* Global reset & hacker vibe */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Courier New', Courier, monospace;
     }
 
     body {
-      background: #0d1117;
-      color: #fff;
-      font-family: 'Roboto', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      background: #0b0e0c;
       min-height: 100vh;
-      padding: 20px 12px;
-      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
     }
 
-    /* main container — everything centered, fits 360px */
-    .app-wrapper {
+    .terminal {
+      background: #0f1210;
       width: 100%;
-      max-width: 360px;          /* fixed at 360px */
+      max-width: 880px;
+      height: 90vh;
+      max-height: 700px;
+      border: 2px solid #1f8a4a;
+      box-shadow: 0 0 30px rgba(0, 255, 100, 0.2), inset 0 0 20px rgba(0, 255, 100, 0.05);
+      border-radius: 18px;
+      padding: 20px 18px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
+      backdrop-filter: blur(1px);
+      transition: all 0.2s ease;
     }
 
-    /* WHATSAPP BAN TOOL BOX */
-    .tool-box {
-      width: 100%;
-      max-width: 340px;          /* slightly less than 360 for breathing */
-      padding: 14px 0;
+    /* glitch header */
+    .header {
+      color: #3ce07a;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-shadow: 0 0 8px #0f8f3a;
+      border-bottom: 1px dashed #1f8a4a;
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .header span {
+      opacity: 0.7;
+      font-size: 0.85rem;
+    }
+
+    /* output area – scrollable */
+    .output {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 6px;
       margin-bottom: 14px;
-      font-size: 2.1em;          /* scaled for 360px */
-      font-weight: bold;
-      color: #00ff7f;
-      border: 3px solid #00ff7f;
-      border-radius: 20px;
-      background: rgba(0, 255, 127, 0.05);
-      text-align: center;
-      box-shadow: 0 0 35px rgba(0, 255, 127, 0.6), 0 0 60px rgba(0, 255, 127, 0.3);
-      letter-spacing: 0.5px;
-      word-break: break-word;
+      color: #b5ffc0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      scroll-behavior: smooth;
+      border-bottom: 1px dashed #1f4d2b;
     }
 
-    /* TOP NAME */
-    .intro-box {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 10px;
+    .output::-webkit-scrollbar {
+      width: 6px;
     }
-    .intro-box .intro {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.6em;          /* scaled for 360px */
-      color: #00ffff;
-      letter-spacing: 2px;
-      text-shadow: 0 0 20px #00ffff, 0 0 40px #00b3b3;
-      font-weight: normal;
-      word-break: break-word;
-      line-height: 1.2;
+    .output::-webkit-scrollbar-track {
+      background: #1a241e;
+    }
+    .output::-webkit-scrollbar-thumb {
+      background: #2f8a4a;
+      border-radius: 8px;
     }
 
-    /* CONTACT BUTTON — centered, small, perfect */
-    .contact-btn {
+    .output .line {
+      white-space: pre-wrap;
+      word-break: break-word;
+      border-left: 2px solid transparent;
+      padding-left: 6px;
+      margin-bottom: 3px;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .output .line.prompt {
+      color: #a0f0b0;
+      border-left-color: #3ce07a;
+    }
+
+    .output .line.cmd {
+      color: #b7ffb7;
+    }
+
+    .output .line.result {
+      color: #9ed9a0;
+      padding-left: 18px;
+      opacity: 0.9;
+    }
+
+    .output .line.error {
+      color: #ff7a7a;
+      border-left-color: #ff4a4a;
+    }
+
+    .output .line.system {
+      color: #7bc98a;
+      font-style: italic;
+      border-left-color: #3c8a5a;
+    }
+
+    /* input row */
+    .input-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 140px;              /* fixed width for 360px */
-      max-width: 80%;
-      padding: 12px 0;
-      margin: 18px 0 10px 0;
-      background: linear-gradient(45deg, #FF06FFFF, #FFFF00E6);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 60px;
-      font-size: 1.5em;          /* 24px approx */
-      font-weight: bold;
-      height: 50px;              /* consistent height */
-      box-shadow: 0 0 20px #ff8c00, 0 0 40px #ff3c00;
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-    }
-    .contact-btn:hover {
-      transform: scale(1.06);
-      box-shadow: 0 0 40px #ff8c00, 0 0 70px #ff3c00;
-    }
-
-    /* ABOUT */
-    .about {
-      font-size: 1.2em;          /* scaled */
-      margin: 6px 0 20px 0;
-      text-align: center;
-      color: #b0b0b0;
-      width: 100%;
-      word-break: break-word;
-      padding: 0 6px;
-    }
-
-    /* SCRIPT BOXES — container */
-    .script-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;                 /* reduced gap for 360px */
-      width: 100%;
-      margin: 6px 0 10px 0;
-    }
-
-    .script-box {
-      width: 280px;              /* fixed width for 360px screen */
-      max-width: 92%;
-      height: 150px;             /* smaller height */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5em;          /* 24px approx */
-      font-weight: bold;
-      color: #fff;
-      border-radius: 35px;
-      cursor: pointer;
-      border: 3px solid rgba(255, 255, 255, 0.2);
-      background: transparent;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.2s;
-      text-decoration: none;
-      padding: 0 8px;
-      word-break: break-word;
-      line-height: 1.2;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-    }
-
-    /* individual neon glows (same as before) */
-    .script-box:nth-child(1) { box-shadow: 0 0 25px #ff4b2b, 0 0 50px #ff512f; }
-    .script-box:nth-child(2) { box-shadow: 0 0 25px #00c6ff, 0 0 50px #0072ff; }
-    .script-box:nth-child(3) { box-shadow: 0 0 25px #8e2de2, 0 0 50px #4a00e0; }
-    .script-box:nth-child(4) { box-shadow: 0 0 25px #feda75, 0 0 50px #ff7e5f; }
-    .script-box:nth-child(5) { box-shadow: 0 0 25px #00ff88, 0 0 50px #009966; }
-    .script-box:nth-child(6) { box-shadow: 0 0 25px #ee0979, 0 0 50px #ff6a00; }
-    .script-box:nth-child(7) { box-shadow: 0 0 25px #8e2de2, 0 0 50px #4a00e0; }
-    .script-box:nth-child(8) { box-shadow: 0 0 25px #feda75, 0 0 50px #ff7e5f; }
-    .script-box:nth-child(9) { box-shadow: 0 0 25px #00c6ff, 0 0 50px #0072ff; }
-    .script-box:nth-child(10) { box-shadow: 0 0 25px #00ff88, 0 0 50px #009966; }
-
-    .script-box:hover {
-      transform: scale(1.05);
-    }
-
-    /* ——— HOW TO USE BUTTON REMOVED ——— */
-    /* no .how-to-use styles, no element */
-
-    /* JOIN WHATSAPP BUTTON (last) */
-    .whatsapp-btn {
-      margin-top: 18px;
-      padding: 14px 28px;        /* smaller padding for 360px */
-      background: linear-gradient(135deg, #25D366, #128C7E);
-      color: #fff;
-      font-size: 1.3em;
+      gap: 8px;
+      flex-shrink: 0;
+      background: #131a16;
+      border: 1px solid #2b6e3e;
       border-radius: 40px;
-      text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
-      transition: transform 0.3s;
-      text-align: center;
-      width: auto;
-      min-width: 200px;
-      max-width: 90%;
+      padding: 4px 12px 4px 18px;
+      transition: 0.15s;
+      box-shadow: 0 0 12px rgba(0, 200, 80, 0.08);
+    }
+
+    .input-row:focus-within {
+      border-color: #46d678;
+      box-shadow: 0 0 20px #1b8f3f44;
+    }
+
+    .input-row .prompt-symbol {
+      color: #5ce68a;
       font-weight: bold;
-      letter-spacing: 0.5px;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      text-shadow: 0 0 6px #1f8f3a;
+    }
+
+    #commandInput {
+      background: transparent;
       border: none;
+      outline: none;
+      color: #d4ffd4;
+      font-size: 1rem;
+      padding: 12px 0;
+      flex: 1;
+      caret-color: #7dffa0;
+      letter-spacing: 0.3px;
+    }
+
+    #commandInput::placeholder {
+      color: #3e6a4a;
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    .input-row button {
+      background: #1b4528;
+      border: none;
+      color: #b5ffc0;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      letter-spacing: 1px;
       cursor: pointer;
-    }
-    .whatsapp-btn:hover {
-      transform: scale(1.04);
-    }
-
-    /* FOOTER */
-    .footer-text {
-      margin-top: 24px;
-      font-size: 0.85em;
-      color: #FFD700;
-      text-align: center;
-      width: 100%;
-      letter-spacing: 0.5px;
-      padding-bottom: 8px;
+      transition: 0.15s;
+      box-shadow: 0 0 6px #0f8f3a33;
+      border: 1px solid #2f8a4a;
     }
 
-    /* small extra spacing */
-    .spacer-8 {
-      height: 8px;
+    .input-row button:hover {
+      background: #276f3a;
+      color: #f0fff0;
+      box-shadow: 0 0 16px #2bd46e55;
+      border-color: #5ce68a;
     }
 
-    /* ensure all boxes scale nicely inside 360px */
-    @media (max-width: 400px) {
-      .tool-box { font-size: 1.8em; padding: 12px 0; }
-      .intro-box .intro { font-size: 2.2em; }
-      .contact-btn { width: 130px; height: 46px; font-size: 1.3em; }
-      .about { font-size: 1.0em; }
-      .script-box { width: 260px; height: 130px; font-size: 1.3em; }
-      .whatsapp-btn { font-size: 1.1em; padding: 12px 20px; min-width: 160px; }
+    .input-row button:active {
+      transform: scale(0.94);
     }
 
-    @media (max-width: 360px) {
-      .tool-box { font-size: 1.6em; }
-      .intro-box .intro { font-size: 2.0em; }
-      .script-box { width: 230px; height: 120px; font-size: 1.2em; }
-      .contact-btn { width: 110px; height: 40px; font-size: 1.1em; }
-      .whatsapp-btn { font-size: 1.0em; padding: 10px 16px; min-width: 140px; }
+    /* status / info */
+    .footer-status {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      color: #366e46;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      flex-shrink: 0;
+      border-top: 1px dashed #1f4d2b;
+      padding-top: 8px;
+    }
+
+    .footer-status .blink {
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0.2; transform: translateY(-2px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* small */
+    .hint {
+      color: #2f6a3f;
+      font-size: 0.7rem;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .hint b {
+      color: #5cc07a;
+      font-weight: normal;
     }
   </style>
 </head>
 <body>
-  <div class="app-wrapper">
-
-    <!-- WHATSAPP BAN TOOL BOX (TOP) -->
-    <div class="tool-box">WHATSAPP BAN TOOL</div>
-
-    <!-- TOP NAME -->
-    <div class="intro-box"><div class="intro">TECHNICAL FAHAD</div></div>
-
-    <!-- CONTACT BUTTON (no "HOW TO USE" above it) -->
-    <a class="contact-btn" href="https://wa.me/923251138959" target="_blank">CONTACT</a>
-
-    <!-- ABOUT -->
-    <div class="about">A Professional Developer & Script Creator</div>
-
-    <!-- SCRIPT BOXES (10 boxes) -->
-    <div class="script-container">
-      <a class="script-box" href="" target="_blank">SCRIPT 1</a>
-      <a class="script-box" href="" target="_blank">SCRIPT 2</a>
-      <a class="script-box" href="" target="_blank">SCRIPT 3</a>
-      <a class="script-box" href="" target="_blank">SCRIPT 4</a>
-      <a class="script-box" href="" target="_blank">SCRIPT 5</a>
-      <a class="script-box" href="" target="_blank">SCRIPT 6</a>
-      <a class="script-box" href="" target="_blank">SCRIPT 7</a>
-      <a class="script-box" href="" target="_blank">SCRIPT 8</a>
-      <a class="script-box" href="" target="_blank">SCRIPT 9</a>
-      <a class="script-box" href="" target="_blank">BAN OP</a>
-    </div>
-
-    <!-- SPACER (since HOW TO USE is removed) -->
-    <div style="height:6px;"></div>
-
-    <!-- JOIN WHATSAPP BUTTON (LAST, WIDE) -->
-    <a class="whatsapp-btn" href="https://whatsapp.com/channel/0029VbCK8wI96H4WL0Ds5n24" target="_blank">JOIN OUR WHATSAPP</a>
-
-    <!-- FOOTER -->
-    <div class="footer-text">2026 TECHNICAL_FAHAD</div>
-
+<div class="terminal">
+  <div class="header">
+    <span>⏣ w0.bas</span>
+    <span>HACK//TRACE</span>
+    <span>【 v2.0 】</span>
   </div>
 
-  <!-- FLOATING SCRIPT BOXES (same as original) -->
-  <script>
-    document.querySelectorAll('.script-box').forEach(box => {
-      let amplitude = Math.random() * 20 + 10;
-      let speed = Math.random() * 0.03 + 0.01;
-      let pos = 0;
-      let dir = 1;
-      function float() {
-        pos += dir * speed * 100;
-        if (pos > amplitude) dir = -1;
-        if (pos < -amplitude) dir = 1;
-        box.style.transform = `translateY(${pos}px)`;
-        requestAnimationFrame(float);
+  <!-- output log -->
+  <div id="outputArea" class="output">
+    <div class="line system">>  INITIALIZING HACKER CORE ...</div>
+    <div class="line system">>  COMMANDS: number | value | report | msg</div>
+    <div class="line system">>  TYPE 'help' FOR USAGE</div>
+    <div class="line system">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+  </div>
+
+  <!-- input row -->
+  <div class="input-row">
+    <span class="prompt-symbol">❯❯</span>
+    <input type="text" id="commandInput" placeholder="enter command ..." autofocus spellcheck="false" autocomplete="off">
+    <button id="executeBtn">⏎ EXEC</button>
+  </div>
+
+  <div class="footer-status">
+    <span class="blink">● ACTIVE</span>
+    <span class="hint">
+      <b>number</b>  <b>value</b>  <b>report</b>  <b>msg</b>
+    </span>
+    <span>⏳ 1–5s delays</span>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const output = document.getElementById('outputArea');
+    const inputField = document.getElementById('commandInput');
+    const execBtn = document.getElementById('executeBtn');
+
+    // --- helper: add line to terminal ---
+    function addLine(text, className = 'result') {
+      const div = document.createElement('div');
+      div.className = `line ${className}`;
+      div.textContent = text;
+      output.appendChild(div);
+      output.scrollTop = output.scrollHeight;
+    }
+
+    // --- random delay 1-5 seconds ---
+    function randomDelay() {
+      return Math.floor(Math.random() * 4000) + 1000; // 1-5 sec
+    }
+
+    // --- simulate "processing" with random delay ---
+    function executeWithDelay(command, callback) {
+      const delay = randomDelay();
+      const execMsg = `⏳ processing '${command}' ... (${(delay/1000).toFixed(1)}s)`;
+      addLine(execMsg, 'system');
+      setTimeout(() => {
+        callback();
+      }, delay);
+    }
+
+    // --- main command handler ---
+    function handleCommand(rawCmd) {
+      const trimmed = rawCmd.trim();
+      if (!trimmed) {
+        addLine('⛔ empty command', 'error');
+        return;
       }
-      float();
+
+      // show the command in terminal (like real terminal)
+      addLine(`> ${trimmed}`, 'cmd');
+
+      // split into parts: command and optional argument
+      const parts = trimmed.split(/\s+/);
+      const mainCmd = parts[0].toLowerCase();
+
+      // ---------- COMMAND DISPATCH ----------
+      if (mainCmd === 'help') {
+        addLine(' ── AVAILABLE COMMANDS ──', 'system');
+        addLine('  number   : set a random number (no arg)', 'result');
+        addLine('  value    : generate a fake value (no arg)', 'result');
+        addLine('  report   : generate a fake report (no arg)', 'result');
+        addLine('  msg      : fake messages  (usage: msg <count>)', 'result');
+        addLine('  clear    : clear terminal', 'result');
+        addLine('  help     : show this help', 'result');
+        addLine(' ────────────────────────', 'system');
+        return;
+      }
+
+      if (mainCmd === 'clear') {
+        output.innerHTML = '';
+        addLine('⏻ terminal cleared', 'system');
+        return;
+      }
+
+      // ---- NUMBER ----
+      if (mainCmd === 'number') {
+        executeWithDelay('number', () => {
+          const num = Math.floor(Math.random() * 9000) + 1000;
+          addLine(`🔢  random number: ${num}`, 'result');
+          addLine(`✓  number stored (fake)`, 'system');
+        });
+        return;
+      }
+
+      // ---- VALUE ----
+      if (mainCmd === 'value') {
+        executeWithDelay('value', () => {
+          const val = (Math.random() * 9999.99).toFixed(2);
+          const label = ['BTC', 'ETH', 'XMR', 'ZEC', 'DASH'][Math.floor(Math.random() * 5)];
+          addLine(`💎  value: ${val} ${label}`, 'result');
+          addLine(`✓  value generated`, 'system');
+        });
+        return;
+      }
+
+      // ---- REPORT ----
+      if (mainCmd === 'report') {
+        executeWithDelay('report', () => {
+          const types = ['system_audit', 'vulnerability_scan', 'network_map', 'traffic_analysis'];
+          const t = types[Math.floor(Math.random() * types.length)];
+          const id = `RPT-${String.fromCharCode(65+Math.floor(Math.random()*26))}${Math.floor(Math.random()*900+100)}`;
+          addLine(`📋  report type: ${t}  |  ID: ${id}`, 'result');
+          addLine(`✅  report ready (encrypted)`, 'system');
+        });
+        return;
+      }
+
+      // ---- MSG (fake messages) ----
+      if (mainCmd === 'msg') {
+        let count = 1;
+        if (parts.length > 1) {
+          const arg = parseInt(parts[1], 10);
+          if (!isNaN(arg) && arg > 0 && arg <= 30) {
+            count = arg;
+          } else {
+            addLine(`⚠️  usage: msg <count>  (1-30)`, 'error');
+            return;
+          }
+        }
+        // if no arg, count = 1
+        executeWithDelay(`msg ${count}`, () => {
+          const fakeMsgs = [
+            '🔹  <ROOT> access granted to 10.0.0.45',
+            '🔸  <SYS>  firewall rule updated (port 22)',
+            '🔹  <PROXY>  connection routed through TOR',
+            '🔸  <AUTH>  new session ID: 0x7F3A2B',
+            '🔹  <DB>    query executed: SELECT * FROM users',
+            '🔸  <CRON>  scheduled job complete',
+            '🔹  <NET>   packet injection successful',
+            '🔸  <LOG>   brute-force attempt blocked',
+            '🔹  <SHELL>  reverse shell established',
+            '🔸  <UPDATE>  kernel patched to 5.10.0'
+          ];
+          for (let i = 0; i < count; i++) {
+            const msg = fakeMsgs[Math.floor(Math.random() * fakeMsgs.length)];
+            addLine(`📨  ${msg}`, 'result');
+          }
+          addLine(`✔  ${count} message(s) injected`, 'system');
+        });
+        return;
+      }
+
+      // ---- UNKNOWN ----
+      addLine(`❌  unknown command: '${mainCmd}'`, 'error');
+      addLine(`    try: number | value | report | msg | clear | help`, 'system');
+    }
+
+    // --- execute from input ---
+    function executeCommand() {
+      const cmd = inputField.value;
+      if (!cmd.trim()) {
+        inputField.value = '';
+        return;
+      }
+      handleCommand(cmd);
+      inputField.value = '';
+      // keep focus
+      inputField.focus();
+    }
+
+    // --- Event listeners ---
+    execBtn.addEventListener('click', executeCommand);
+
+    inputField.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        executeCommand();
+      }
     });
-  </script>
+
+    // initial focus
+    inputField.focus();
+
+    // (optional) add some extra style : welcome message already there
+    // also catch click on terminal to focus input
+    document.querySelector('.terminal').addEventListener('click', (e) => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON') {
+        inputField.focus();
+      }
+    });
+
+  })();
+</script>
 </body>
-  </html>
+</html>
